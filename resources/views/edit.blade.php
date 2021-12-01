@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/vazir-font.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/fontello.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/jalalidatepicker/persian-datepicker.min.css')}}">
 </head>
 <body id="page-top">
 <div id="wrapper">
@@ -22,6 +23,13 @@
             <div class="sidebar-brand-text mx-3">کتابخانه شهر کدنشین ها</div>
         </a>
         <hr class="sidebar-divider my-0">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('mainepage')}}">
+                <i class="icon-fw icon-book"></i>
+                <span>صفحه اصلی</span></a>
+        </li>
+
         <li class="nav-item active">
             <a class="nav-link" href="{{route('dashboard')}}">
                 <i class="icon-fw icon-gauge"></i>
@@ -57,7 +65,7 @@
                 </button>
             </nav>
             <div class="container-fluid">
-                <h1 class="h3 mb-2 text-gray-800"><i class="icon-plus"></i> افزودن کتاب</h1>
+                <h1 class="h3 mb-2 text-gray-800"><i class="icon-plus"></i> ویرایش کتاب</h1>
                 {{--                <?php--}}
                 {{--                $flash = Flash::get();--}}
                 {{--                if (!empty($flash)) { ?>--}}
@@ -100,12 +108,29 @@
                                 <label for="name">تعداد</label>
                                 <input type="text" name="quantity" class="form-control" id="name">
                             </div>
+
+                            <div class="form-group">
+
+                                <label for="name">روز فروش</label>
+                                <input type="date" name="time" class="form-control" id="name">
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="name">ساعت فروش</label>
+                                <input type="time" name="time" class="form-control" id="name">
+                            </div>
+
+
                             <button type="submit"  class="btn btn-primary">ثبت</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
@@ -145,6 +170,12 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+
 <script>var base_url = '#';</script>
 <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
 <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -153,6 +184,8 @@
 <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('assets/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>
+<script src="{{ asset('assets/jalalidatepicker/persian-date.min.js') }}"></script>
+<script src="{{ asset('assets/jalalidatepicker/persian-datepicker.min.js') }}"></script>
 </body>
 </html>
 

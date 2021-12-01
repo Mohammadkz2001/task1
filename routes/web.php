@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/',[\App\Http\Controllers\MaineController::class,'show'])->name('mainepage');
+
+Route::get('/search',\App\Http\Controllers\SearchController::class)->name('search');
+
 Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'dashboard'])->name('dashboard');
 
 Route::prefix('book')->group(function () {
@@ -38,6 +43,10 @@ Route::post('register', [\App\Http\Controllers\RegisterController::class, 'regis
 
 Route::get('is_admin', [\App\Http\Controllers\AdminController::class, 'show'])->name('is_admin');
 
+Route::post('ckeditor/upload', [\App\Http\Controllers\CkeditorController::class,'upload'])->name('ckeditor.image-upload');
 
+Route::get('deleted_books', [\App\Http\Controllers\DeletedBooksController::class,'list'])->name('deleted_books_list');
 
+Route::get('deleted_books', [\App\Http\Controllers\DeletedBooksController::class,'list'])->name('deleted_books_list');
 
+Route::get('deleted_books_restore/{id}', [\App\Http\Controllers\DeletedBooksController::class,'restore'])->name('deleted_books_restore');

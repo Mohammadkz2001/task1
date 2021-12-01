@@ -1,5 +1,5 @@
 @extends('layouts.sidebar')
-
+<script src="{{asset('ckeditor/ckeditor.js')}}"></script>
     <!DOCTYPE html>
 <html lang="fa">
 <head>
@@ -22,6 +22,13 @@
             <div class="sidebar-brand-text mx-3">کتابخانه شهر کدنشین ها</div>
         </a>
         <hr class="sidebar-divider my-0">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('mainepage')}}">
+                <i class="icon-fw icon-book"></i>
+                <span>صفحه اصلی</span></a>
+        </li>
+
         <li class="nav-item active">
             <a class="nav-link" href="{{route('dashboard')}}">
                 <i class="icon-fw icon-gauge"></i>
@@ -67,7 +74,7 @@
                 {{--                <?php } ?>--}}
                 <div class="card shadow mb-4">
                     <div class="card-body">
-                        <form method="post" action="{{route('book.store')}}">
+                        <form method="post" enctype="multipart/form-data" action="{{route('book.store')}}">
                             @csrf
                             @php
                                 echo \Illuminate\Support\Facades\Session::get('massage')
@@ -94,11 +101,49 @@
                                     @endforeach
                                 </select>
                             </div>
+
+                            <div class="form-group">
+                                <label for="publisher">توضیحات</label>
+                                <textarea name="description" id="editor1"></textarea>
+                            </div>
+
+
+
+                            <script>
+
+                                CKEDITOR.replace('editor1',{
+                                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                                    filebrowserUploadMethod: 'form',
+                                    extraPlugins: 'uploadimage',
+
+                                });
+
+
+
+                            </script>
+
                             <div class="form-group">
 
                                 <label for="name">تعداد</label>
                                 <input type="text" name="quantity" class="form-control" id="name">
                             </div>
+
+
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="file" class="col-md-3 col-form-label">فایل ضمیمه</label>
+
+                                    <div class="col-md-9">
+                                        <input id="file" type="file" class="form-control @error('file') is-invalid @enderror" name="file">
+                                        @error('file')
+                                        <span class="invalid-feedback" role="alert">
+						<strong>{{ $message }}</strong>
+					</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
                             <button type="submit"  class="btn btn-primary">ثبت</button>
                         </form>
                     </div>

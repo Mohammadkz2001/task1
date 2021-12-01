@@ -22,6 +22,13 @@
             <div class="sidebar-brand-text mx-3">کتابخانه شهر کدنشین ها</div>
         </a>
         <hr class="sidebar-divider my-0">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('mainepage')}}">
+                <i class="icon-fw icon-book"></i>
+                <span>صفحه اصلی</span></a>
+        </li>
+
         <li class="nav-item active">
             <a class="nav-link" href="{{route('dashboard')}}">
                 <i class="icon-fw icon-gauge"></i>

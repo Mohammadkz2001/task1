@@ -1,6 +1,5 @@
-@extends('layouts.sidebar')
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fa">
 <head>
     <meta charset="utf-8">
@@ -23,6 +22,13 @@
             <div class="sidebar-brand-text mx-3">کتابخانه شهر کدنشین ها</div>
         </a>
         <hr class="sidebar-divider my-0">
+
+        <li class="nav-item">
+            <a class="nav-link" href="{{route('mainepage')}}">
+                <i class="icon-fw icon-book"></i>
+                <span>صفحه اصلی</span></a>
+        </li>
+
         <li class="nav-item active">
             <a class="nav-link" href="{{route('dashboard')}}">
                 <i class="icon-fw icon-gauge"></i>
@@ -60,13 +66,9 @@
             <div class="container-fluid">
                 <h1 class="h3 mb-2 text-gray-800"><i class="icon-book"></i> کتاب‌ها</h1>
                 <a href="{{route('book.store')}}" class="btn btn-success mb-3"><i class="icon-plus"></i> افزودن کتاب</a>
-                {{--          <?php--}}
-                {{--          $flash = Flash::get();--}}
-                {{--          if (!empty($flash)) { ?>--}}
-                {{--          <div class="alert alert-<?php echo $flash['type'] ?>" role="alert">--}}
-                {{--            <?php echo $flash['message'] ?>--}}
-                {{--          </div>--}}
-                {{--          <?php } ?>--}}
+
+                <a href="{{route('deleted_books_list')}}" class="btn btn-success mb-3"><i ></i>لیست کتاب های حذف شده</a>
+
                 <div class="card shadow mb-4">
                     <div class="card-body">
                         <div class="table-responsive">
@@ -77,8 +79,12 @@
                                     <th>نویسنده</th>
                                     <th>ناشر</th>
                                     <th>موجودی</th>
+                                    <th>عکس</th>
+                                    <th>توضیحات</th>
                                     <th>حذف</th>
                                     <th>ویرایش</th>
+
+
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -88,6 +94,11 @@
                                         <td>{{$book->author->name}}</td>
                                         <td>{{$book->publisher->name}}</td>
                                         <td>{{$book->quantity}}</td>
+                                        <td><img src="{{$book->getFirstMediaUrl('books_images')}}" alt=""></td>
+                                        <td>{!! $book->description !!}  </td>
+
+
+
                                         <td>
                                             <form action="{{route('book.delete',$book->id)}}" method="post">
                                                 @csrf
@@ -95,6 +106,7 @@
                                                 <input class="btn btn-primary" name="delete" type="submit">
                                             </form>
                                         </td>
+
                                         <td>
                                             <a href="{{route('edit.book',$book->id)}}"
                                                class="btn btn-warning text-white"><i

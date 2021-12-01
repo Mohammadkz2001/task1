@@ -4,16 +4,30 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Book extends Model
+class Book extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia, Searchable, SoftDeletes;
 
 
-    public function __construct()
-    {
+    protected $fillable = [
+        'name',
+        'author_id',
+        'publisher_id',
+        'quantity',
+        'description',
 
-    }
+
+    ];
+//    public function __construct()
+//    {
+//
+//    }
 
 
     public function author()
@@ -26,5 +40,9 @@ class Book extends Model
         return $this->belongsTo(publisher::class);
     }
 
+    public function week()
+    {
+        return $this->belongsToMany(Week::class);
+    }
 
 }
